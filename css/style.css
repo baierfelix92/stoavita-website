@@ -1,0 +1,505 @@
+/* ============================================
+   StoaVita Website — Design System v1
+   Farben & Typografie aus StoaVita_Design_System_v1
+   ============================================ */
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  color: #1B1B1B;
+  background: #FFFFFF;
+  line-height: 1.6;
+}
+
+a {
+  color: #8B9068;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #7a8155;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* --- Container --- */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* --- Navigation --- */
+.navbar {
+  background: #FFFFFF;
+  border-bottom: 1px solid #E0DDD5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 32px;
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #8B9068;
+  letter-spacing: 2px;
+}
+
+.navbar-brand:hover {
+  color: #7a8155;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 32px;
+  align-items: center;
+}
+
+.nav-links a {
+  color: #444;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #8B9068;
+}
+
+.nav-cta {
+  background: #8B9068;
+  color: #FFFFFF !important;
+  padding: 10px 24px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  transition: background 0.3s;
+}
+
+.nav-cta:hover {
+  background: #7a8155;
+  color: #FFFFFF !important;
+}
+
+/* Mobile Menu Toggle */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #1B1B1B;
+  margin: 5px 0;
+  transition: 0.3s;
+}
+
+/* --- Hero Section --- */
+.hero {
+  background: #8B9068;
+  padding: 160px 32px 100px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.hero .tagline {
+  font-size: 1.15rem;
+  color: #C5C1B9;
+  font-style: italic;
+  letter-spacing: 0.8px;
+  margin-bottom: 40px;
+}
+
+.hero p {
+  font-size: 1.05rem;
+  color: #eef2e6;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+.hero-cta {
+  display: inline-block;
+  background: #FFFFFF;
+  color: #8B9068;
+  padding: 14px 40px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+}
+
+.hero-cta:hover {
+  background: #F8F7F5;
+  color: #7a8155;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+/* --- Section Base --- */
+section {
+  padding: 80px 0;
+}
+
+.section-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #8B9068;
+  letter-spacing: 0.3px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: #666;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 48px;
+  line-height: 1.6;
+}
+
+/* --- Leistungen (Services) --- */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.service-card {
+  background: #FFFFFF;
+  border: 1px solid #E0DDD5;
+  border-radius: 8px;
+  padding: 36px 28px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  border-color: #8B9068;
+}
+
+.service-icon {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #F8F7F5, #F0EFE9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 1.5rem;
+}
+
+.service-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1B1B1B;
+  margin-bottom: 12px;
+}
+
+.service-card p {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* --- Ueber Mich (About) --- */
+.about {
+  background: #F8F7F5;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.about-image {
+  background: linear-gradient(135deg, #8B9068, #7a8155);
+  border-radius: 8px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  font-weight: 300;
+}
+
+.about-text h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #8B9068;
+  margin-bottom: 16px;
+}
+
+.about-text p {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.about-highlights {
+  list-style: none;
+  margin-top: 24px;
+}
+
+.about-highlights li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.about-highlights .dot {
+  width: 8px;
+  height: 8px;
+  min-width: 8px;
+  background: #8B9068;
+  border-radius: 50%;
+  margin-top: 6px;
+}
+
+/* --- Philosophie --- */
+.philosophy {
+  background: #8B9068;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 80px 0;
+}
+
+.philosophy .section-title {
+  color: #FFFFFF;
+}
+
+.philosophy blockquote {
+  font-size: 1.3rem;
+  font-style: italic;
+  color: #eef2e6;
+  max-width: 700px;
+  margin: 0 auto 16px;
+  line-height: 1.7;
+}
+
+.philosophy .quote-author {
+  font-size: 0.9rem;
+  color: #C5C1B9;
+  letter-spacing: 0.5px;
+}
+
+/* --- Kontakt --- */
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+.contact-info h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #8B9068;
+  margin-bottom: 16px;
+}
+
+.contact-info p {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.contact-details {
+  list-style: none;
+}
+
+.contact-details li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.contact-details .icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #F8F7F5, #F0EFE9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #E0DDD5;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: #1B1B1B;
+  background: #FFFFFF;
+  margin-bottom: 16px;
+  transition: border-color 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #8B9068;
+}
+
+.contact-form textarea {
+  height: 140px;
+  resize: vertical;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: #8B9068;
+  color: #FFFFFF;
+  padding: 14px 36px;
+  border: none;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-primary:hover {
+  background: #7a8155;
+  transform: translateY(-1px);
+}
+
+/* --- Footer --- */
+.footer {
+  background: #1B1B1B;
+  color: #BBB;
+  text-align: center;
+  padding: 32px;
+}
+
+.footer p {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.footer a {
+  color: #BBB;
+}
+
+.footer a:hover {
+  color: #FFFFFF;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: #FFFFFF;
+    flex-direction: column;
+    padding: 24px 32px;
+    gap: 20px;
+    border-bottom: 1px solid #E0DDD5;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .hero {
+    padding: 130px 24px 70px;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .about-image {
+    height: 250px;
+  }
+
+  .contact-content {
+    grid-template-columns: 1fr;
+  }
+
+  .philosophy blockquote {
+    font-size: 1.1rem;
+  }
+}

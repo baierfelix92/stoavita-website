@@ -349,9 +349,10 @@
     <div class="success">
       <div class="check">&#10003;</div>
       <h2>Vielen Dank!</h2>
+      <p id="sendStatus" style="font-weight: 600; margin-bottom: 8px; color: #4a7a4a;">Wird gesendet...</p>
       <p>Dein Feedback ist fuer mich und die Weiterentwicklung meiner Beratung sehr wertvoll. Ich melde mich zeitnah bei dir.</p>
 
-      <a id="emailBtn" class="btn-email" href="#">&#9993; Per E-Mail senden</a>
+      <a id="emailBtn" class="btn-email" href="#" style="display:none;">&#9993; Alternativ per E-Mail senden</a>
       <br>
       <button id="copyBtn" class="btn-copy">&#128203; In Zwischenablage kopieren</button>
 
@@ -488,6 +489,43 @@
 
   function submit() {
     var text = buildText();
+    var freigabe = { full: 'Mit vollem Namen', firstname: 'Nur Vorname', anon: 'Anonym', no: 'Keine Veroeffentlichung' };
+
+    // Send to Formspree automatically
+    var formData = {
+      name: val('qName'),
+      email: val('qEmail'),
+      freigabe: freigabe[answers['q10']] || '-',
+      hauptgrund: val('q1'),
+      themen: (chips['q2'] || []).join(', '),
+      veraenderungen: val('q3'),
+      umgesetzte_massnahmen: (chips['q4'] || []).join(', '),
+      groesster_nutzen: val('q5'),
+      bewertung_gesamthilfe: (answers['q6'] || '-') + '/10',
+      bewertung_verstaendlichkeit: (answers['q7'] || '-') + '/10',
+      bewertung_vertrauen: (answers['q8'] || '-') + '/10',
+      testimonial: val('q9'),
+      _subject: 'Neues StoaVita Testimonial von ' + val('qName')
+    };
+
+    fetch('https://formspree.io/f/mreolywa', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(formData)
+    }).then(function(res) {
+      if (!res.ok) {
+        document.getElementById('sendStatus').textContent = 'Automatisches Senden fehlgeschlagen. Bitte nutze die Buttons unten.';
+        document.getElementById('sendStatus').style.color = '#b56565';
+        document.getElementById('emailBtn').style.display = 'inline-flex';
+      } else {
+        document.getElementById('sendStatus').textContent = 'Dein Feedback wurde erfolgreich gesendet!';
+        document.getElementById('sendStatus').style.color = '#4a7a4a';
+      }
+    }).catch(function() {
+      document.getElementById('sendStatus').textContent = 'Automatisches Senden fehlgeschlagen. Bitte nutze die Buttons unten.';
+      document.getElementById('sendStatus').style.color = '#b56565';
+      document.getElementById('emailBtn').style.display = 'inline-flex';
+    });
 
     // Show success
     for (var i = 1; i <= totalSteps; i++) document.getElementById('step' + i).classList.add('hidden');
@@ -496,12 +534,12 @@
     document.getElementById('progressFill').style.width = '100%';
     document.getElementById('progressLabel').textContent = 'Abgeschlossen';
 
-    // Email button
+    // Email button (fallback)
     var subject = encodeURIComponent('StoaVita Testimonial von ' + val('qName'));
     var body = encodeURIComponent(text);
     document.getElementById('emailBtn').href = 'mailto:info@stoavita.de?subject=' + subject + '&body=' + body;
 
-    // Copy button
+    // Copy button (fallback)
     document.getElementById('copyBtn').onclick = function() {
       navigator.clipboard.writeText(text).then(function() {
         var btn = document.getElementById('copyBtn');

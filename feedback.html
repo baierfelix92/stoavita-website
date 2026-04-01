@@ -245,7 +245,7 @@
     </div>
 
     <div class="question">
-      <label>Welche Themen wolltest du vor allem verbessern?<span class="req">*</span></label>
+      <label>Welche Themen wolltest du vor allem verbessern?</label>
       <div class="hint">Mehrfachauswahl moeglich</div>
       <div class="chips" id="q2chips">
         <button class="chip" data-q="q2">Energie im Alltag</button>
@@ -437,17 +437,16 @@
   function validate() {
     var valid = true;
     if (currentStep === 1) {
-      if (!val('q1') || val('q1').length < 10) valid = false;
-      if (!chips['q2'] || chips['q2'].length === 0) valid = false;
+      if (!val('q1') || val('q1').length < 3) valid = false;
     } else if (currentStep === 2) {
-      if (!val('q3') || val('q3').length < 10) valid = false;
-      if (!val('q5') || val('q5').length < 10) valid = false;
+      if (!val('q3') || val('q3').length < 3) valid = false;
+      if (!val('q5') || val('q5').length < 3) valid = false;
     } else if (currentStep === 3) {
       if (!answers['q6']) valid = false;
       if (!answers['q7']) valid = false;
       if (!answers['q8']) valid = false;
     } else if (currentStep === 4) {
-      if (!val('q9') || val('q9').length < 10) valid = false;
+      if (!val('q9') || val('q9').length < 3) valid = false;
       if (!val('qName') || val('qName').length < 2) valid = false;
       if (!val('qEmail') || val('qEmail').indexOf('@') === -1) valid = false;
       if (!answers['q10']) valid = false;

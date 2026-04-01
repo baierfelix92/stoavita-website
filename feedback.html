@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StoaVita — Feedback & Testimonial</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --sv-dark: #1a3a1a;
+    --sv-green: #4a7a4a;
+    --sv-green-light: #e8f2e8;
+    --sv-gold: #b8975a;
+    --sv-bg: #fafaf7;
+    --sv-white: #ffffff;
+    --sv-border: #d4e4d0;
+    --sv-text: #2a3a2a;
+    --sv-muted: #7a9a7a;
+    --sv-olive: #8B9068;
+  }
+
+  body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    background: radial-gradient(ellipse at 20% 50%, #d4e8d0 0%, var(--sv-bg) 60%);
+    color: var(--sv-text);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 16px;
+  }
+
+  .card {
+    background: var(--sv-white);
+    border-radius: 20px;
+    box-shadow: 0 8px 48px rgba(26,58,26,0.12), 0 2px 8px rgba(26,58,26,0.06);
+    padding: 40px 48px;
+    width: 100%;
+    max-width: 680px;
+  }
+
+  @media (max-width: 600px) {
+    .card { padding: 28px 20px; }
+    body { padding: 20px 12px; }
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--sv-green-light);
+  }
+
+  .logo-box {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: var(--sv-dark);
+    color: #c8d8c0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 700; letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+
+  .header-text h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 22px; font-weight: 700; color: var(--sv-dark);
+    letter-spacing: -0.3px;
+  }
+
+  .header-text p {
+    font-size: 12px; color: var(--sv-green);
+    letter-spacing: 0.5px; margin-top: 2px;
+  }
+
+  /* Progress */
+  .progress-bar { height: 4px; border-radius: 2px; background: var(--sv-green-light); margin-bottom: 6px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--sv-green), var(--sv-gold)); transition: width 0.4s ease; }
+  .progress-label { font-size: 11px; color: var(--sv-green); text-align: right; letter-spacing: 0.5px; margin-bottom: 24px; }
+
+  /* Step pill */
+  .step-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--sv-green-light); border-radius: 20px;
+    padding: 6px 14px; font-size: 11px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--sv-dark); margin-bottom: 28px;
+  }
+  .step-pill .num { color: var(--sv-gold); font-weight: 800; }
+
+  /* Questions */
+  .question { margin-bottom: 28px; }
+  .question:last-child { margin-bottom: 0; }
+
+  .question label {
+    display: block; font-family: 'Playfair Display', Georgia, serif;
+    font-size: 16px; font-weight: 600; color: var(--sv-dark);
+    line-height: 1.5; margin-bottom: 8px;
+  }
+
+  .question label .req { color: var(--sv-gold); margin-left: 3px; }
+  .question .hint { font-size: 12px; color: var(--sv-green); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+  textarea, input[type="text"], input[type="email"] {
+    width: 100%; border: 1.5px solid var(--sv-border); border-radius: 10px;
+    padding: 12px 14px; font-size: 15px; font-family: inherit;
+    color: var(--sv-text); background: #fdfefd; line-height: 1.6;
+    resize: vertical; outline: none; transition: border-color 0.2s;
+  }
+  textarea:focus, input:focus { border-color: var(--sv-green); }
+  textarea { min-height: 100px; }
+
+  /* Chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    padding: 8px 16px; border-radius: 24px; font-size: 13px;
+    border: 1.5px solid #c8dcc8; background: var(--sv-white);
+    color: #3a5a3a; cursor: pointer; transition: all 0.2s;
+    user-select: none; font-family: inherit;
+  }
+  .chip:hover { border-color: var(--sv-green); }
+  .chip.selected {
+    border-color: var(--sv-dark); background: var(--sv-dark); color: #c8e8c0;
+  }
+  .chip.selected::before { content: "\2713 "; color: var(--sv-gold); font-weight: 700; }
+
+  /* Rating */
+  .rating-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
+  .rating-btn {
+    width: 44px; height: 44px; border-radius: 10px; border: 1.5px solid #c8dcc8;
+    background: var(--sv-white); color: var(--sv-green); font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; font-family: inherit;
+  }
+  .rating-btn:hover { border-color: var(--sv-green); }
+  .rating-btn.filled { background: var(--sv-green-light); color: var(--sv-dark); }
+  .rating-btn.selected {
+    border-color: var(--sv-dark); background: var(--sv-dark); color: #c8e8c0;
+    transform: scale(1.1); box-shadow: 0 4px 12px rgba(26,58,26,0.25);
+  }
+  .rating-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--sv-muted); letter-spacing: 0.3px; }
+
+  /* Radio */
+  .radio-group { display: flex; flex-direction: column; gap: 8px; }
+  .radio-btn {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px; border-radius: 10px; border: 1.5px solid #c8dcc8;
+    background: var(--sv-white); cursor: pointer; transition: all 0.2s;
+    font-size: 14px; color: #2a4a2a; font-family: inherit; text-align: left; width: 100%;
+  }
+  .radio-btn:hover { border-color: var(--sv-green); }
+  .radio-btn.selected { border-color: var(--sv-green); background: var(--sv-green-light); color: var(--sv-dark); font-weight: 600; }
+  .radio-dot {
+    width: 16px; height: 16px; border-radius: 50%; border: 2px solid #b0cab0;
+    flex-shrink: 0; transition: all 0.2s;
+  }
+  .radio-btn.selected .radio-dot {
+    border-color: var(--sv-dark); background: var(--sv-dark);
+    box-shadow: inset 0 0 0 3px var(--sv-white);
+  }
+
+  /* Highlight box */
+  .highlight-box {
+    background: linear-gradient(135deg, #f7fdf7, #fffdf4);
+    border: 1px solid rgba(184,151,90,0.2);
+    border-radius: 12px; padding: 20px 22px; margin: 0 -4px;
+  }
+
+  /* Navigation */
+  .nav { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--sv-green-light); gap: 12px; }
+  .btn-back {
+    padding: 12px 20px; border-radius: 10px; border: 1.5px solid #c8dcc8;
+    background: transparent; color: var(--sv-green); font-size: 14px;
+    font-weight: 600; cursor: pointer; font-family: inherit;
+  }
+  .btn-back:hover { border-color: var(--sv-green); }
+  .btn-next {
+    margin-left: auto; padding: 12px 28px; border-radius: 10px; border: none;
+    background: var(--sv-dark); color: #c8e8c0; font-size: 14px;
+    font-weight: 700; cursor: pointer; font-family: inherit;
+    letter-spacing: 0.3px; box-shadow: 0 4px 16px rgba(26,58,26,0.2);
+    transition: all 0.2s;
+  }
+  .btn-next:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(26,58,26,0.3); }
+  .btn-next:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  /* Success */
+  .success { text-align: center; padding: 20px 0; }
+  .success .check { font-size: 52px; color: var(--sv-green); margin-bottom: 16px; }
+  .success h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 28px; color: var(--sv-dark); margin-bottom: 12px; }
+  .success p { color: #4a5e4a; max-width: 400px; margin: 0 auto 28px; line-height: 1.7; }
+  .success .sig { font-size: 13px; letter-spacing: 2px; color: var(--sv-muted); }
+
+  /* Copy button */
+  .btn-copy {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 24px; border-radius: 10px; border: 1.5px solid var(--sv-olive);
+    background: var(--sv-white); color: var(--sv-olive); font-size: 14px;
+    font-weight: 600; cursor: pointer; font-family: inherit;
+    transition: all 0.2s; margin-top: 16px;
+  }
+  .btn-copy:hover { background: var(--sv-olive); color: var(--sv-white); }
+  .btn-copy.copied { background: var(--sv-green); color: var(--sv-white); border-color: var(--sv-green); }
+
+  .btn-email {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px; border-radius: 10px; border: none;
+    background: var(--sv-dark); color: #c8e8c0; font-size: 14px;
+    font-weight: 700; cursor: pointer; font-family: inherit;
+    letter-spacing: 0.3px; box-shadow: 0 4px 16px rgba(26,58,26,0.2);
+    transition: all 0.2s; text-decoration: none; margin-top: 12px;
+  }
+  .btn-email:hover { transform: translateY(-1px); }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="card" id="app">
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-box">SV</div>
+    <div class="header-text">
+      <h1>StoaVita</h1>
+      <p>Feedback & Testimonial</p>
+    </div>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 25%"></div></div>
+  <div class="progress-label" id="progressLabel">Abschnitt 1 von 4</div>
+
+  <!-- STEP 1: Ausgangslage -->
+  <div class="step" id="step1">
+    <div class="step-pill"><span class="num">01</span> Ausgangslage</div>
+
+    <div class="question">
+      <label>Was war der Hauptgrund, warum du dich fuer die StoaVita Beratung entschieden hast?<span class="req">*</span></label>
+      <textarea id="q1" placeholder="Bitte beschreibe kurz deine Ausgangssituation und Motivation ..."></textarea>
+    </div>
+
+    <div class="question">
+      <label>Welche Themen wolltest du vor allem verbessern?<span class="req">*</span></label>
+      <div class="hint">Mehrfachauswahl moeglich</div>
+      <div class="chips" id="q2chips">
+        <button class="chip" data-q="q2">Energie im Alltag</button>
+        <button class="chip" data-q="q2">Schlaf</button>
+        <button class="chip" data-q="q2">Stress / Regeneration</button>
+        <button class="chip" data-q="q2">Koerperliche Leistungsfaehigkeit</button>
+        <button class="chip" data-q="q2">Mentale Klarheit</button>
+        <button class="chip" data-q="q2">Gewichtsmanagement</button>
+        <button class="chip" data-q="q2">Praevention / gesund altern</button>
+        <button class="chip" data-q="q2">Gesundheitswerte optimieren</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: Ergebnisse -->
+  <div class="step hidden" id="step2">
+    <div class="step-pill"><span class="num">02</span> Ergebnisse</div>
+
+    <div class="question">
+      <label>Was hat sich durch die Zusammenarbeit fuer dich am deutlichsten veraendert?<span class="req">*</span></label>
+      <textarea id="q3" placeholder="Konkrete Veraenderungen, spuerbare Unterschiede im Alltag ..."></textarea>
+    </div>
+
+    <div class="question">
+      <label>Welche Empfehlungen hast du tatsaechlich umgesetzt?</label>
+      <div class="hint">Mehrfachauswahl moeglich</div>
+      <div class="chips" id="q4chips">
+        <button class="chip" data-q="q4">Ernaehrung</button>
+        <button class="chip" data-q="q4">Schlafoptimierung</button>
+        <button class="chip" data-q="q4">Training / Bewegung</button>
+        <button class="chip" data-q="q4">Stressmanagement</button>
+        <button class="chip" data-q="q4">Supplemente</button>
+        <button class="chip" data-q="q4">Routinen / Alltagsstruktur</button>
+        <button class="chip" data-q="q4">Tracking von Gesundheitswerten</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <label>Was war dein groesster persoenlicher Nutzen?<span class="req">*</span></label>
+      <textarea id="q5" placeholder="Was hat sich fuer dich am nachhaltigsten veraendert? ..."></textarea>
+    </div>
+  </div>
+
+  <!-- STEP 3: Bewertung -->
+  <div class="step hidden" id="step3">
+    <div class="step-pill"><span class="num">03</span> Bewertung</div>
+
+    <div class="question">
+      <label>Wie stark hat dir die Beratung insgesamt geholfen?<span class="req">*</span></label>
+      <div class="rating-row" data-q="q6"></div>
+      <div class="rating-labels"><span>Kaum hilfreich</span><span>Extrem hilfreich</span></div>
+    </div>
+
+    <div class="question">
+      <label>Wie verstaendlich und alltagstauglich waren die Empfehlungen?<span class="req">*</span></label>
+      <div class="rating-row" data-q="q7"></div>
+      <div class="rating-labels"><span>Schwer umsetzbar</span><span>Sehr klar & leicht umsetzbar</span></div>
+    </div>
+
+    <div class="question">
+      <label>Hattest du das Gefuehl, verantwortungsvoll und fair beraten worden zu sein?<span class="req">*</span></label>
+      <div class="rating-row" data-q="q8"></div>
+      <div class="rating-labels"><span>Ueberhaupt nicht</span><span>Absolut</span></div>
+    </div>
+  </div>
+
+  <!-- STEP 4: Testimonial & Freigabe -->
+  <div class="step hidden" id="step4">
+    <div class="step-pill"><span class="num">04</span> Testimonial & Freigabe</div>
+
+    <div class="question">
+      <div class="highlight-box">
+        <label>Wenn du die StoaVita Beratung in 1-2 Saetzen beschreiben muesstest — was wuerdest du sagen?<span class="req">*</span></label>
+        <textarea id="q9" placeholder="Dein persoenliches Statement ..." rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="question">
+      <label>Dein Name<span class="req">*</span></label>
+      <input type="text" id="qName" placeholder="Vorname Nachname">
+    </div>
+
+    <div class="question">
+      <label>Deine E-Mail (nur fuer Rueckfragen)<span class="req">*</span></label>
+      <input type="email" id="qEmail" placeholder="name@beispiel.de">
+    </div>
+
+    <div class="question">
+      <label>Duerfen wir dein Feedback als Testimonial verwenden?<span class="req">*</span></label>
+      <div class="radio-group" id="q10radios">
+        <button class="radio-btn" data-val="full"><span class="radio-dot"></span>Ja, mit Name und Funktion</button>
+        <button class="radio-btn" data-val="firstname"><span class="radio-dot"></span>Ja, nur mit Vorname</button>
+        <button class="radio-btn" data-val="anon"><span class="radio-dot"></span>Ja, anonym</button>
+        <button class="radio-btn" data-val="no"><span class="radio-dot"></span>Nein, bitte nicht veroeffentlichen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="step hidden" id="stepSuccess">
+    <div class="success">
+      <div class="check">&#10003;</div>
+      <h2>Vielen Dank!</h2>
+      <p>Dein Feedback ist fuer mich und die Weiterentwicklung meiner Beratung sehr wertvoll. Ich melde mich zeitnah bei dir.</p>
+
+      <a id="emailBtn" class="btn-email" href="#">&#9993; Per E-Mail senden</a>
+      <br>
+      <button id="copyBtn" class="btn-copy">&#128203; In Zwischenablage kopieren</button>
+
+      <br><br>
+      <div class="sig">STOA<strong>VITA</strong> &middot; Felix Baier</div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="nav" id="navBar">
+    <button class="btn-back hidden" id="btnBack" onclick="goBack()">&larr; Zurueck</button>
+    <button class="btn-next" id="btnNext" onclick="goNext()" disabled>Weiter &rarr;</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  var currentStep = 1;
+  var totalSteps = 4;
+  var answers = {};
+  var chips = {};
+
+  // Init rating buttons
+  document.querySelectorAll('.rating-row[data-q]').forEach(function(row) {
+    var qid = row.dataset.q;
+    for (var i = 1; i <= 10; i++) {
+      var btn = document.createElement('button');
+      btn.className = 'rating-btn';
+      btn.textContent = i;
+      btn.dataset.val = i;
+      btn.onclick = function() {
+        answers[qid] = parseInt(this.dataset.val);
+        updateRating(row, qid);
+        validate();
+      };
+      row.appendChild(btn);
+    }
+  });
+
+  function updateRating(row, qid) {
+    var val = answers[qid] || 0;
+    row.querySelectorAll('.rating-btn').forEach(function(btn) {
+      var n = parseInt(btn.dataset.val);
+      btn.className = 'rating-btn' + (n === val ? ' selected' : (n < val ? ' filled' : ''));
+    });
+  }
+
+  // Chip selection
+  document.querySelectorAll('.chip').forEach(function(chip) {
+    chip.onclick = function() {
+      var qid = this.dataset.q;
+      if (!chips[qid]) chips[qid] = [];
+      var text = this.textContent.replace(/^\u2713 /, '');
+      var idx = chips[qid].indexOf(text);
+      if (idx === -1) {
+        chips[qid].push(text);
+        this.classList.add('selected');
+      } else {
+        chips[qid].splice(idx, 1);
+        this.classList.remove('selected');
+      }
+      validate();
+    };
+  });
+
+  // Radio selection
+  document.querySelectorAll('.radio-btn').forEach(function(btn) {
+    btn.onclick = function() {
+      var group = this.parentElement;
+      group.querySelectorAll('.radio-btn').forEach(function(b) { b.classList.remove('selected'); });
+      this.classList.add('selected');
+      answers['q10'] = this.dataset.val;
+      validate();
+    };
+  });
+
+  // Input validation on typing
+  document.querySelectorAll('textarea, input').forEach(function(el) {
+    el.addEventListener('input', validate);
+  });
+
+  function validate() {
+    var valid = true;
+    if (currentStep === 1) {
+      if (!val('q1') || val('q1').length < 10) valid = false;
+      if (!chips['q2'] || chips['q2'].length === 0) valid = false;
+    } else if (currentStep === 2) {
+      if (!val('q3') || val('q3').length < 10) valid = false;
+      if (!val('q5') || val('q5').length < 10) valid = false;
+    } else if (currentStep === 3) {
+      if (!answers['q6']) valid = false;
+      if (!answers['q7']) valid = false;
+      if (!answers['q8']) valid = false;
+    } else if (currentStep === 4) {
+      if (!val('q9') || val('q9').length < 10) valid = false;
+      if (!val('qName') || val('qName').length < 2) valid = false;
+      if (!val('qEmail') || val('qEmail').indexOf('@') === -1) valid = false;
+      if (!answers['q10']) valid = false;
+    }
+    document.getElementById('btnNext').disabled = !valid;
+  }
+
+  function val(id) {
+    var el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+
+  window.goNext = function() {
+    if (document.getElementById('btnNext').disabled) return;
+    if (currentStep < totalSteps) {
+      showStep(currentStep + 1);
+    } else {
+      submit();
+    }
+  };
+
+  window.goBack = function() {
+    if (currentStep > 1) showStep(currentStep - 1);
+  };
+
+  function showStep(n) {
+    for (var i = 1; i <= totalSteps; i++) {
+      document.getElementById('step' + i).classList.toggle('hidden', i !== n);
+    }
+    currentStep = n;
+    var pct = (n / totalSteps) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = 'Abschnitt ' + n + ' von ' + totalSteps;
+    document.getElementById('btnBack').classList.toggle('hidden', n === 1);
+    document.getElementById('btnNext').textContent = n === totalSteps ? 'Absenden' : 'Weiter \u2192';
+    validate();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function submit() {
+    var text = buildText();
+
+    // Show success
+    for (var i = 1; i <= totalSteps; i++) document.getElementById('step' + i).classList.add('hidden');
+    document.getElementById('stepSuccess').classList.remove('hidden');
+    document.getElementById('navBar').classList.add('hidden');
+    document.getElementById('progressFill').style.width = '100%';
+    document.getElementById('progressLabel').textContent = 'Abgeschlossen';
+
+    // Email button
+    var subject = encodeURIComponent('StoaVita Testimonial von ' + val('qName'));
+    var body = encodeURIComponent(text);
+    document.getElementById('emailBtn').href = 'mailto:info@stoavita.de?subject=' + subject + '&body=' + body;
+
+    // Copy button
+    document.getElementById('copyBtn').onclick = function() {
+      navigator.clipboard.writeText(text).then(function() {
+        var btn = document.getElementById('copyBtn');
+        btn.classList.add('copied');
+        btn.innerHTML = '&#10003; Kopiert!';
+        setTimeout(function() { btn.classList.remove('copied'); btn.innerHTML = '&#128203; In Zwischenablage kopieren'; }, 2500);
+      });
+    };
+  }
+
+  function buildText() {
+    var freigabe = { full: 'Mit vollem Namen', firstname: 'Nur Vorname', anon: 'Anonym', no: 'Keine Veroeffentlichung' };
+    var lines = [];
+    lines.push('=== STOAVITA FEEDBACK & TESTIMONIAL ===');
+    lines.push('');
+    lines.push('Name: ' + val('qName'));
+    lines.push('E-Mail: ' + val('qEmail'));
+    lines.push('Freigabe: ' + (freigabe[answers['q10']] || '-'));
+    lines.push('');
+    lines.push('--- AUSGANGSLAGE ---');
+    lines.push('Hauptgrund: ' + val('q1'));
+    lines.push('Themen: ' + (chips['q2'] || []).join(', '));
+    lines.push('');
+    lines.push('--- ERGEBNISSE ---');
+    lines.push('Veraenderungen: ' + val('q3'));
+    lines.push('Umgesetzte Massnahmen: ' + (chips['q4'] || []).join(', '));
+    lines.push('Groesster Nutzen: ' + val('q5'));
+    lines.push('');
+    lines.push('--- BEWERTUNG ---');
+    lines.push('Gesamthilfe: ' + (answers['q6'] || '-') + '/10');
+    lines.push('Verstaendlichkeit: ' + (answers['q7'] || '-') + '/10');
+    lines.push('Vertrauenswuerdigkeit: ' + (answers['q8'] || '-') + '/10');
+    lines.push('');
+    lines.push('--- TESTIMONIAL ---');
+    lines.push(val('q9'));
+    lines.push('');
+    lines.push('---');
+    lines.push('Gesendet via StoaVita Testimonial-Formular');
+    return lines.join('\n');
+  }
+
+  validate();
+})();
+</script>
+</body>
+</html>
